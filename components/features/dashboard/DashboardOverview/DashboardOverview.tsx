@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { CheckCircle2, DollarSign, Package, ShoppingBag, TrendingUp, Truck, Users } from "lucide-react";
+import { CheckCircle2, DollarSign, ShoppingBag, TrendingUp, Users } from "lucide-react";
 import { formatRelativeTime } from "@/features/dashboard/lib/dashboard-data";
 import type { DashboardOverviewProps } from "./DashboardOverview.types";
 

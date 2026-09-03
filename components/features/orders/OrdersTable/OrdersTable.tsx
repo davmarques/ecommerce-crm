@@ -1,7 +1,6 @@
 "use client";
 
 import { CheckCircle2, Clock, DollarSign, Eye, Package, Search, ShoppingBag, Truck } from "lucide-react";
-import type { OrderStatus } from "@/features/orders/types/Order.types";
 import type { OrdersTableProps } from "./OrdersTable.types";
 
 const statusLabels: Record<string, string> = {
