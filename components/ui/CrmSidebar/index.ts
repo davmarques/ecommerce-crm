@@ -1,1 +1,2 @@
-export { CrmSidebar } from "./CrmSidebar";
+export * from "./CrmSidebar";
+export * from "./CrmSidebar.types";

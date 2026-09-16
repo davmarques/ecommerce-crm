@@ -1,8 +1,8 @@
-"use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { X } from "lucide-react";
+import type { CrmSidebarProps } from "./CrmSidebar.types";
 
 interface NavigationItem {
   href: string;
@@ -26,22 +26,38 @@ const settingsSubNavigation = [
   { href: "/settings/team", label: "Equipe" },
 ];
 
-export function CrmSidebar() {
+export function CrmSidebar({ isOpen = false, onClose }: CrmSidebarProps) {
   const pathname = usePathname();
   const isSettingsActive = pathname.startsWith("/settings");
   const [isSettingsOpen, setIsSettingsOpen] = useState(isSettingsActive);
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-50 flex w-[250px] flex-col justify-between bg-[#1D2735] p-4 text-slate-200">
-      <div>
-        <div className="mb-8 flex items-center gap-3 px-2 py-1">
-          <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/12 text-sm font-semibold">
-            F
+    <aside
+      className={`fixed inset-y-0 left-0 z-50 flex w-[260px] max-w-[85vw] flex-col justify-between bg-[#1D2735] p-4 text-slate-200 transition-transform duration-300 ease-in-out md:w-[250px] md:translate-x-0 ${
+        isOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full"
+      }`}
+    >
+      <div className="flex flex-1 flex-col overflow-y-auto pr-1">
+        <div className="mb-6 flex items-center justify-between px-2 py-1">
+          <div className="flex items-center gap-3">
+            <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/12 text-sm font-semibold text-white">
+              SD
+            </div>
+            <div>
+              <p className="text-lg font-semibold leading-none text-white">Storms</p>
+              <p className="mt-1 text-xs tracking-[0.18em] text-slate-400">Development</p>
+            </div>
           </div>
-          <div>
-            <p className="text-lg font-semibold leading-none">Forge</p>
-            <p className="mt-1 text-xs tracking-[0.18em] text-slate-400">CRM SUITE</p>
-          </div>
+          {onClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Fechar menu"
+              className="rounded-lg p-1.5 text-slate-400 hover:bg-white/10 hover:text-white md:hidden"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          )}
         </div>
 
         <p className="px-2 text-xs uppercase tracking-[0.22em] text-slate-500">Workspace</p>
@@ -70,8 +86,9 @@ export function CrmSidebar() {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={() => onClose?.()}
                 className={`flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-sm transition ${
-                  isActive ? "bg-[#6C8FB4] text-white" : "text-slate-300 hover:bg-white/8"
+                  isActive ? "bg-[#6C8FB4] font-medium text-white" : "text-slate-300 hover:bg-white/8"
                 }`}
               >
                 <span>{item.label}</span>
@@ -84,7 +101,7 @@ export function CrmSidebar() {
               type="button"
               onClick={() => setIsSettingsOpen((open) => !open)}
               className={`flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-sm transition ${
-                isSettingsActive ? "bg-[#6C8FB4] text-white" : "text-slate-300 hover:bg-white/8"
+                isSettingsActive ? "bg-[#6C8FB4] font-medium text-white" : "text-slate-300 hover:bg-white/8"
               }`}
             >
               <span>Configurações</span>
@@ -110,8 +127,9 @@ export function CrmSidebar() {
                     <Link
                       key={item.href}
                       href={item.href}
+                      onClick={() => onClose?.()}
                       className={`flex w-full items-center rounded-xl px-3 py-2 text-left text-sm transition ${
-                        isActive ? "bg-[#6C8FB4] text-white" : "text-slate-300 hover:bg-white/8"
+                        isActive ? "bg-[#6C8FB4] font-medium text-white" : "text-slate-300 hover:bg-white/8"
                       }`}
                     >
                       {item.label}
@@ -124,7 +142,7 @@ export function CrmSidebar() {
         </nav>
       </div>
 
-      <div className="rounded-2xl bg-[#2A3647] p-4">
+      <div className="mt-4 rounded-2xl bg-[#2A3647] p-4">
         <p className="text-sm font-semibold text-slate-100">Meta do trimestre</p>
         <p className="mt-1 text-sm text-slate-300">$780k de $1.2M target</p>
         <div className="mt-3 h-2 rounded-full bg-white/10">

@@ -552,7 +552,7 @@ export function StoreHomeSettings({
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-[580px] md:h-[660px]">
+              <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 min-h-[580px] md:h-[660px]">
                 {categorySlots.map((slot) => {
                   const selectedId = settings[slot.idField];
                   const customImage = settings[slot.imageField];
@@ -562,7 +562,7 @@ export function StoreHomeSettings({
                   return (
                     <div
                       key={slot.slotNum}
-                      className={`group relative overflow-hidden rounded-3xl shadow-xl transition-all duration-300  ${slot.bg} ${slot.gridClass}`}
+                      className={`group relative overflow-hidden rounded-3xl shadow-xl transition-all duration-300 min-h-[220px] md:min-h-0 ${slot.bg} ${slot.gridClass}`}
                     >
                       {/* Background Image */}
                       {customImage ? (

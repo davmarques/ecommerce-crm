@@ -70,7 +70,7 @@ export function OrderDetailsModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/45 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/45 p-2 sm:p-4"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -79,18 +79,18 @@ export function OrderDetailsModal({
         role="dialog"
         aria-modal="true"
         aria-label={`Detalhes do pedido #${order.orderNumber}`}
-        className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
+        className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
       >
-        <header className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-200 bg-white px-6 py-4">
-          <div className="flex items-center gap-3">
+        <header className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 bg-white px-4 py-3 sm:px-6 sm:py-4">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#6C8FB4]">
+              <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#6C8FB4]">
                 Pedido
               </p>
-              <h2 className="text-xl font-bold text-slate-900">#{order.orderNumber}</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-slate-900">#{order.orderNumber}</h2>
             </div>
             <span
-              className={`rounded-full border px-3 py-1 text-xs font-semibold ${
+              className={`rounded-full border px-2.5 py-0.5 sm:px-3 sm:py-1 text-[11px] sm:text-xs font-semibold ${
                 statusColors[currentStatus] || "bg-slate-100 text-slate-800"
               }`}
             >
@@ -101,23 +101,23 @@ export function OrderDetailsModal({
             type="button"
             onClick={onClose}
             aria-label="Fechar detalhes"
-            className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+            className="rounded-lg p-1.5 sm:p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
           >
             <X className="h-5 w-5" />
           </button>
         </header>
 
-        <div className="space-y-6 p-6">
+        <div className="space-y-4 sm:space-y-6 p-4 sm:p-6">
           {/* Status Changer Toolbar */}
           {onStatusChange && (
-            <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div className="flex flex-col gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3.5 sm:p-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-xs font-semibold uppercase text-slate-500">Alterar Status</p>
-                <p className="text-sm font-medium text-slate-800">
-                  Atualize o progresso deste pedido no sistema
+                <p className="text-[10px] sm:text-xs font-semibold uppercase text-slate-500">Alterar Status</p>
+                <p className="text-xs sm:text-sm font-medium text-slate-800">
+                  Atualize o progresso deste pedido
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {(["PENDING", "PAID", "SHIPPED", "DELIVERED", "CANCELED"] as OrderStatus[]).map(
                   (status) => (
                     <button
@@ -125,9 +125,9 @@ export function OrderDetailsModal({
                       type="button"
                       disabled={isUpdatingStatus || order.status === status}
                       onClick={() => onStatusChange(order.id, status)}
-                      className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+                      className={`rounded-lg px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs font-semibold transition ${
                         order.status === status
-                          ? "bg-[#1D2735] text-white shadow-sm"
+                          ? "bg-[#1D2735] text-white shadow-xs"
                           : "border border-slate-300 bg-white text-slate-700 hover:bg-slate-100"
                       } disabled:opacity-50`}
                     >
@@ -140,18 +140,18 @@ export function OrderDetailsModal({
           )}
 
           {/* Grid with Client & Shipping Data */}
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-2">
             {/* Customer Info Card */}
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
-              <div className="mb-3 flex items-center gap-2 text-slate-800">
+            <div className="rounded-xl border border-slate-200 bg-white p-3.5 sm:p-4">
+              <div className="mb-2.5 sm:mb-3 flex items-center gap-2 text-slate-800">
                 <User className="h-4 w-4 text-[#6C8FB4]" />
                 <h3 className="text-sm font-semibold">Dados do Cliente</h3>
               </div>
-              <div className="space-y-2 text-sm text-slate-600">
+              <div className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-slate-600">
                 <p>
-                  <strong className="text-slate-900">{order.customerName}</strong>
+                  <strong className="text-slate-900 font-medium">{order.customerName}</strong>
                 </p>
-                <p className="text-xs">{order.customerEmail}</p>
+                <p className="text-xs text-slate-500 break-all">{order.customerEmail}</p>
                 {order.customerPhone && (
                   <p className="flex items-center gap-1.5 text-xs">
                     <Phone className="h-3 w-3 text-slate-400" />
@@ -165,20 +165,20 @@ export function OrderDetailsModal({
             </div>
 
             {/* Delivery Info Card */}
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
-              <div className="mb-3 flex items-center gap-2 text-slate-800">
+            <div className="rounded-xl border border-slate-200 bg-white p-3.5 sm:p-4">
+              <div className="mb-2.5 sm:mb-3 flex items-center gap-2 text-slate-800">
                 <MapPin className="h-4 w-4 text-[#6C8FB4]" />
                 <h3 className="text-sm font-semibold">Entrega & Rastreio</h3>
               </div>
-              <div className="space-y-1.5 text-sm text-slate-600">
-                <p className="text-xs text-slate-800">{order.shippingAddress || "Endereço não informado"}</p>
+              <div className="space-y-1.5 text-xs sm:text-sm text-slate-600">
+                <p className="text-xs text-slate-800 leading-relaxed">{order.shippingAddress || "Endereço não informado"}</p>
                 <p className="text-xs">
                   {order.shippingCity && order.shippingState
                     ? `${order.shippingCity} - ${order.shippingState}`
                     : ""}
                   {order.shippingZip ? ` | CEP ${order.shippingZip}` : ""}
                 </p>
-                <div className="mt-2 flex items-center gap-2">
+                <div className="mt-2 flex flex-wrap items-center gap-1.5">
                   <span className="inline-flex items-center gap-1 rounded bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700">
                     <Truck className="h-3 w-3" />
                     {order.shippingService || "Envio padrão"}
@@ -195,14 +195,14 @@ export function OrderDetailsModal({
 
           {/* Products List */}
           <div className="rounded-xl border border-slate-200 bg-white">
-            <div className="flex items-center gap-2 border-b border-slate-100 p-4">
+            <div className="flex items-center gap-2 border-b border-slate-100 p-3.5 sm:p-4">
               <Package className="h-4 w-4 text-[#6C8FB4]" />
               <h3 className="text-sm font-semibold text-slate-900">Itens do Pedido</h3>
             </div>
             <div className="divide-y divide-slate-100">
               {order.items && order.items.length > 0 ? (
                 order.items.map((item) => (
-                  <div key={item.id} className="flex items-center justify-between p-4 text-sm">
+                  <div key={item.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3.5 sm:p-4 text-xs sm:text-sm">
                     <div>
                       <p className="font-medium text-slate-900">{item.variant?.product?.name}</p>
                       <p className="text-xs text-slate-500">
@@ -210,34 +210,34 @@ export function OrderDetailsModal({
                         • SKU: {item.variant?.sku}
                       </p>
                     </div>
-                    <div className="text-right">
+                    <div className="flex items-center justify-between sm:flex-col sm:items-end">
                       <p className="font-medium text-slate-900">
                         {item.quantity}x {formatCurrency(item.price)}
                       </p>
                       <p className="text-xs text-slate-500">
-                        {formatCurrency(item.quantity * item.price)}
+                        Total: {formatCurrency(item.quantity * item.price)}
                       </p>
                     </div>
                   </div>
                 ))
               ) : (
-                <p className="p-4 text-sm text-slate-500">Nenhum item listado neste pedido.</p>
+                <p className="p-4 text-xs sm:text-sm text-slate-500">Nenhum item listado neste pedido.</p>
               )}
             </div>
           </div>
 
           {/* Financial Summary */}
-          <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-            <div className="mb-3 flex items-center justify-between">
+          <div className="rounded-xl border border-slate-200 bg-slate-50 p-3.5 sm:p-4">
+            <div className="mb-2.5 sm:mb-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <CreditCard className="h-4 w-4 text-[#6C8FB4]" />
-                <span className="text-sm font-semibold text-slate-900">Resumo Financeiro</span>
+                <span className="text-xs sm:text-sm font-semibold text-slate-900">Resumo Financeiro</span>
               </div>
-              <span className="rounded bg-white px-2.5 py-1 text-xs font-medium text-slate-700 shadow-sm border border-slate-200">
+              <span className="rounded bg-white px-2.5 py-1 text-xs font-medium text-slate-700 shadow-2xs border border-slate-200">
                 {order.paymentMethod || "PIX"}
               </span>
             </div>
-            <div className="space-y-1.5 text-sm text-slate-600">
+            <div className="space-y-1.5 text-xs sm:text-sm text-slate-600">
               <div className="flex justify-between">
                 <span>Subtotal ({order.items?.length || 0} itens)</span>
                 <span>{formatCurrency(subtotal || total - (order.shippingCost || 0))}</span>
@@ -248,9 +248,9 @@ export function OrderDetailsModal({
               </div>
               <div className="flex justify-between border-t border-slate-200 pt-2 font-bold text-slate-900">
                 <span>Total</span>
-                <span className="text-base text-slate-950">{formatCurrency(total)}</span>
+                <span className="text-sm sm:text-base text-slate-950">{formatCurrency(total)}</span>
               </div>
-              <div className="mt-2 text-right text-xs text-slate-400">
+              <div className="mt-2 text-right text-[11px] text-slate-400">
                 Realizado em: {formatDate(order.createdAt)}
               </div>
             </div>
@@ -260,3 +260,4 @@ export function OrderDetailsModal({
     </div>
   );
 }
+

@@ -10,7 +10,7 @@ export function DashboardLoginView({
   onSubmit,
 }: DashboardLoginViewProps) {
   return (
-    <main className="flex min-h-screen items-center justify-center p-6 lg:p-10">
+    <main className="flex min-h-screen items-center justify-center p-4 sm:p-6 lg:p-10">
       <section className="w-full max-w-5xl overflow-hidden rounded-[28px] border border-slate-200/70 bg-white shadow-[0_20px_70px_-35px_rgba(16,24,40,0.45)] lg:grid lg:grid-cols-[1.2fr_1fr]">
         <div className="relative hidden overflow-hidden bg-[#1E2A39] p-10 text-slate-100 lg:block">
           <div className="absolute -right-24 -top-20 h-52 w-52 rounded-full bg-[#60A5FA]/20" />
@@ -29,7 +29,7 @@ export function DashboardLoginView({
           </p>
         </div>
 
-        <div className="p-8 lg:p-10">
+        <div className="p-6 sm:p-8 lg:p-10">
           <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Acesso CRM</p>
           <h2 className="mt-3 text-3xl font-semibold text-slate-900">Entrar no painel</h2>
           <p className="mt-3 text-sm text-slate-600">

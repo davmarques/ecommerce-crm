@@ -50,7 +50,7 @@ export default function CustomerProfilePage() {
     return (
       <CrmPageShell title="Carregando..." description="">
         <div className="text-center py-12">
-          <p className="text-gray-500">Carregando perfil...</p>
+          <p className="text-xs sm:text-sm text-slate-500">Carregando perfil...</p>
         </div>
       </CrmPageShell>
     );
@@ -59,8 +59,8 @@ export default function CustomerProfilePage() {
   if (!profile) {
     return (
       <CrmPageShell title="Perfil do Cliente" description="">
-        <div className="text-center py-12">
-          <p className="text-gray-500">Cliente não encontrado</p>
+        <div className="text-center py-12 rounded-2xl border border-slate-200 bg-white p-6 shadow-xs">
+          <p className="text-xs sm:text-sm text-slate-500">Cliente não encontrado.</p>
         </div>
       </CrmPageShell>
     );
@@ -68,58 +68,57 @@ export default function CustomerProfilePage() {
 
   return (
     <CrmPageShell title={profile.name} description={profile.email}>
-      <div className="space-y-6">
-        <p className="text-gray-600">{profile.email}</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="space-y-4 sm:space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-6">
           {/* LTV Card */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-semibold text-gray-600">Valor Lifetime</h3>
-            <p className="text-3xl font-bold text-gray-900 mt-2">R$ {profile.ltv.toFixed(2)}</p>
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-6">
+            <h3 className="text-xs sm:text-sm font-semibold text-slate-600">Valor Lifetime (LTV)</h3>
+            <p className="text-2xl sm:text-3xl font-bold text-slate-900 mt-2">R$ {profile.ltv.toFixed(2)}</p>
           </div>
 
           {/* Total de Compras */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-semibold text-gray-600">Pedidos Realizados</h3>
-            <p className="text-3xl font-bold text-gray-900 mt-2">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-6">
+            <h3 className="text-xs sm:text-sm font-semibold text-slate-600">Pedidos Realizados</h3>
+            <p className="text-2xl sm:text-3xl font-bold text-slate-900 mt-2">
               {profile.purchaseHistory.length}
             </p>
           </div>
 
           {/* Favoritos */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-semibold text-gray-600">Itens Favoritos</h3>
-            <p className="text-3xl font-bold text-gray-900 mt-2">{profile.favorites.length}</p>
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-6">
+            <h3 className="text-xs sm:text-sm font-semibold text-slate-600">Itens Favoritos</h3>
+            <p className="text-2xl sm:text-3xl font-bold text-slate-900 mt-2">{profile.favorites.length}</p>
           </div>
         </div>
 
         {/* Endereço */}
         {profile.address && (
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Endereço</h2>
-            <p className="text-gray-600">{profile.address.street}</p>
-            <p className="text-gray-600">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-6">
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900 mb-3 sm:mb-4">Endereço</h2>
+            <p className="text-xs sm:text-sm text-slate-600">{profile.address.street}</p>
+            <p className="text-xs sm:text-sm text-slate-600">
               {profile.address.city}, {profile.address.state} {profile.address.zipCode}
             </p>
           </div>
         )}
 
         {/* Histórico de Compras */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Histórico de Compras</h2>
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-6">
+          <h2 className="text-base sm:text-lg font-semibold text-slate-900 mb-3 sm:mb-4">Histórico de Compras</h2>
           {profile.purchaseHistory.length === 0 ? (
-            <p className="text-gray-600">Nenhuma compra realizada</p>
+            <p className="text-xs sm:text-sm text-slate-500">Nenhuma compra realizada.</p>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4 divide-y divide-slate-100">
               {profile.purchaseHistory.map((order) => (
-                <div key={order.id} className="border-t pt-4">
-                  <div className="flex justify-between">
+                <div key={order.id} className="pt-3 sm:pt-4">
+                  <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                     <div>
-                      <p className="font-medium text-gray-900">
+                      <p className="font-medium text-slate-900 text-xs sm:text-sm">
                         {new Date(order.date).toLocaleDateString("pt-BR")}
                       </p>
-                      <p className="text-sm text-gray-600">{order.products.join(", ")}</p>
+                      <p className="text-xs text-slate-600">{order.products.join(", ")}</p>
                     </div>
-                    <p className="font-semibold text-gray-900">R$ {order.amount.toFixed(2)}</p>
+                    <p className="font-semibold text-slate-900 text-xs sm:text-sm">R$ {order.amount.toFixed(2)}</p>
                   </div>
                 </div>
               ))}
@@ -128,16 +127,16 @@ export default function CustomerProfilePage() {
         </div>
 
         {/* Timeline de Atividades */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Atividades</h2>
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-4 sm:p-6">
+          <h2 className="text-base sm:text-lg font-semibold text-slate-900 mb-3 sm:mb-4">Atividades</h2>
           {profile.activities.length === 0 ? (
-            <p className="text-gray-600">Nenhuma atividade registrada</p>
+            <p className="text-xs sm:text-sm text-slate-500">Nenhuma atividade registrada.</p>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {profile.activities.map((activity) => (
-                <div key={activity.id} className="border-l-4 border-blue-500 pl-4 py-2">
-                  <p className="font-medium text-gray-900">{activity.description}</p>
-                  <p className="text-sm text-gray-600">
+                <div key={activity.id} className="border-l-4 border-blue-500 pl-3.5 py-1.5">
+                  <p className="font-medium text-slate-900 text-xs sm:text-sm">{activity.description}</p>
+                  <p className="text-[11px] sm:text-xs text-slate-500">
                     {new Date(activity.date).toLocaleDateString("pt-BR")}
                   </p>
                 </div>
@@ -149,3 +148,4 @@ export default function CustomerProfilePage() {
     </CrmPageShell>
   );
 }
+

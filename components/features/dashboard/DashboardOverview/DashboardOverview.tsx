@@ -42,26 +42,26 @@ export function DashboardOverview({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Welcome Header */}
       <div>
-        <h1 className="text-3xl font-bold text-slate-900">
+        <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">
           {getGreeting()}, {user.name.split(" ")[0]}
         </h1>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-xs text-slate-500 sm:text-sm">
           Visão geral e métricas em tempo real da loja e dos clientes.
         </p>
       </div>
 
       {/* Error feedback */}
       {error && (
-        <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">
+        <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-xs sm:text-sm text-rose-700">
           {error}
         </div>
       )}
 
       {/* KPI Stats Cards */}
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 xl:grid-cols-4 sm:gap-4">
         {cardStats.map((item, index) => {
           const icons = [DollarSign, TrendingUp, CheckCircle2, Users];
           const Icon = icons[index % icons.length];
@@ -69,7 +69,7 @@ export function DashboardOverview({
           return (
             <article
               key={item.label}
-              className="rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_10px_28px_-24px_rgba(15,23,42,0.65)] transition hover:border-[#6C8FB4]/40"
+              className="rounded-2xl sm:rounded-3xl border border-slate-200 bg-white p-4 sm:p-5 shadow-[0_10px_28px_-24px_rgba(15,23,42,0.65)] transition hover:border-[#6C8FB4]/40"
             >
               <div className="flex items-start justify-between">
                 <div className="grid h-10 w-10 place-items-center rounded-2xl bg-slate-50 border border-slate-100 text-slate-700">
@@ -87,8 +87,8 @@ export function DashboardOverview({
                   {item.trend}
                 </span>
               </div>
-              <p className="mt-4 text-3xl font-bold text-slate-900">{item.value}</p>
-              <p className="mt-1 text-xs font-medium uppercase tracking-wider text-slate-500">
+              <p className="mt-3 sm:mt-4 text-2xl sm:text-3xl font-bold text-slate-900">{item.value}</p>
+              <p className="mt-1 text-[11px] sm:text-xs font-medium uppercase tracking-wider text-slate-500">
                 {item.label}
               </p>
             </article>
@@ -97,17 +97,17 @@ export function DashboardOverview({
       </section>
 
       {/* Charts Section: Receita vs Meta & Status dos Pedidos */}
-      <section className="grid gap-6 xl:grid-cols-[2fr_1.2fr]">
+      <section className="grid gap-4 sm:gap-6 xl:grid-cols-[2fr_1.2fr]">
         {/* Receita vs Meta Line Chart */}
-        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_10px_28px_-24px_rgba(15,23,42,0.65)]">
-          <div className="flex items-center justify-between">
+        <article className="rounded-2xl sm:rounded-3xl border border-slate-200 bg-white p-4 sm:p-6 shadow-[0_10px_28px_-24px_rgba(15,23,42,0.65)]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4">
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Receita vs Meta</h2>
+              <h2 className="text-base sm:text-lg font-bold text-slate-900">Receita vs Meta</h2>
               <p className="text-xs text-slate-500">
                 Evolução nos últimos 6 meses a partir dos pedidos reais
               </p>
             </div>
-            <div className="flex items-center gap-4 text-xs font-medium text-slate-600">
+            <div className="flex items-center gap-3 sm:gap-4 text-xs font-medium text-slate-600">
               <span className="flex items-center gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#2F65A9]" />
                 Realizado
@@ -119,8 +119,8 @@ export function DashboardOverview({
             </div>
           </div>
 
-          <div className="mt-6 overflow-hidden rounded-2xl border border-slate-100 bg-[#F9FBFD] p-4">
-            <svg viewBox="0 0 920 260" className="h-[240px] w-full">
+          <div className="mt-4 sm:mt-6 overflow-x-auto rounded-2xl border border-slate-100 bg-[#F9FBFD] p-2 sm:p-4">
+            <svg viewBox="0 0 920 260" className="h-[200px] sm:h-[240px] w-full min-w-[420px] sm:min-w-0">
               {[0, 1, 2, 3].map((line) => (
                 <line
                   key={line}
@@ -165,10 +165,10 @@ export function DashboardOverview({
         </article>
 
         {/* Status dos Pedidos Breakdown */}
-        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_10px_28px_-24px_rgba(15,23,42,0.65)]">
+        <article className="rounded-2xl sm:rounded-3xl border border-slate-200 bg-white p-4 sm:p-6 shadow-[0_10px_28px_-24px_rgba(15,23,42,0.65)]">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Status dos Pedidos</h2>
+              <h2 className="text-base sm:text-lg font-bold text-slate-900">Status dos Pedidos</h2>
               <p className="text-xs text-slate-500">Distribuição por etapa de atendimento</p>
             </div>
             <Link
@@ -179,13 +179,13 @@ export function DashboardOverview({
             </Link>
           </div>
 
-          <div className="mt-6 space-y-3.5">
+          <div className="mt-4 sm:mt-6 space-y-3 sm:space-y-3.5">
             {ordersStatusSummary.map((item) => (
               <div key={item.status} className="space-y-1.5">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-semibold text-slate-700">{item.label}</span>
-                  <span className="text-slate-500">
-                    {item.count} pedidos ({formatCurrency(item.value)})
+                  <span className="text-slate-500 text-[11px] sm:text-xs">
+                    {item.count} ({formatCurrency(item.value)})
                   </span>
                 </div>
                 <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
@@ -204,33 +204,33 @@ export function DashboardOverview({
       </section>
 
       {/* Bottom Section: Últimos Pedidos & Atividade Recente */}
-      <section className="grid gap-6 xl:grid-cols-[1.5fr_1fr]">
+      <section className="grid gap-4 sm:gap-6 xl:grid-cols-[1.5fr_1fr]">
         {/* Recent Orders */}
-        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_10px_28px_-24px_rgba(15,23,42,0.65)]">
+        <article className="rounded-2xl sm:rounded-3xl border border-slate-200 bg-white p-4 sm:p-6 shadow-[0_10px_28px_-24px_rgba(15,23,42,0.65)]">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <ShoppingBag className="h-5 w-5 text-[#6C8FB4]" />
-              <h2 className="text-lg font-bold text-slate-900">Últimos Pedidos</h2>
+              <h2 className="text-base sm:text-lg font-bold text-slate-900">Últimos Pedidos</h2>
             </div>
             <Link
               href="/orders"
               className="text-xs font-semibold text-[#6C8FB4] hover:underline"
             >
-              Gerenciar Pedidos →
+              Gerenciar →
             </Link>
           </div>
 
-          <div className="mt-5 space-y-3">
+          <div className="mt-4 sm:mt-5 space-y-3">
             {recentOrders.map((order) => (
               <div
                 key={order.id}
-                className="flex flex-col gap-3 rounded-2xl border border-slate-100 bg-slate-50/70 p-4 transition hover:bg-slate-50 md:flex-row md:items-center md:justify-between"
+                className="flex flex-col gap-2.5 rounded-2xl border border-slate-100 bg-slate-50/70 p-3.5 sm:p-4 transition hover:bg-slate-50 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div>
                   <div className="flex items-center gap-2">
-                    <p className="font-semibold text-slate-900">#{order.orderNumber}</p>
+                    <p className="font-semibold text-slate-900 text-sm">#{order.orderNumber}</p>
                     <span className="text-xs text-slate-400">•</span>
-                    <p className="text-sm font-medium text-slate-700">{order.customerName}</p>
+                    <p className="text-xs sm:text-sm font-medium text-slate-700 truncate max-w-[180px] sm:max-w-none">{order.customerName}</p>
                   </div>
                   <p className="mt-0.5 text-xs text-slate-500">
                     {order.items.length} {order.items.length === 1 ? "item" : "itens"} •{" "}
@@ -238,12 +238,12 @@ export function DashboardOverview({
                   </p>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <p className="text-base font-bold text-slate-900">
+                <div className="flex items-center justify-between sm:justify-end gap-3 pt-1 sm:pt-0 border-t border-slate-200/50 sm:border-0">
+                  <p className="text-sm sm:text-base font-bold text-slate-900">
                     {formatCurrency(order.totalAmount)}
                   </p>
                   <span
-                    className={`rounded-full border px-2.5 py-1 text-xs font-semibold ${
+                    className={`rounded-full border px-2.5 py-0.5 sm:py-1 text-[11px] sm:text-xs font-semibold ${
                       STATUS_BADGE_STYLES[order.status] || "bg-slate-100 text-slate-700"
                     }`}
                   >
@@ -262,9 +262,9 @@ export function DashboardOverview({
         </article>
 
         {/* Recent Activities */}
-        <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_10px_28px_-24px_rgba(15,23,42,0.65)]">
+        <article className="rounded-2xl sm:rounded-3xl border border-slate-200 bg-white p-4 sm:p-6 shadow-[0_10px_28px_-24px_rgba(15,23,42,0.65)]">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-slate-900">Atividade Recente</h2>
+            <h2 className="text-base sm:text-lg font-bold text-slate-900">Atividade Recente</h2>
             <Link
               href="/activity"
               className="text-xs font-semibold text-[#6C8FB4] hover:underline"
@@ -273,13 +273,13 @@ export function DashboardOverview({
             </Link>
           </div>
 
-          <div className="mt-5 space-y-3">
+          <div className="mt-4 sm:mt-5 space-y-3">
             {recentActivities.map((activity) => (
               <div
                 key={activity.id}
-                className="flex items-start gap-3 rounded-2xl border border-slate-100 p-3.5 transition hover:bg-slate-50/50"
+                className="flex items-start gap-3 rounded-2xl border border-slate-100 p-3 sm:p-3.5 transition hover:bg-slate-50/50"
               >
-                <div className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[#1D2735] text-xs font-bold text-white shadow-sm">
+                <div className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-[#1D2735] text-xs font-bold text-white shadow-xs">
                   {activity.actorName.charAt(0).toUpperCase()}
                 </div>
                 <div className="min-w-0 flex-1">
@@ -315,3 +315,4 @@ export function DashboardOverview({
     </div>
   );
 }
+
